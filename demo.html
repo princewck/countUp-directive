@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular frequently count up demo</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-group>* {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body ng-app="app" class="text-center">
+    <div ng-controller="mainController">
+        <div class="page-header text-center">
+             <h1 f-count-up="countData" 
+                 useEasing="true" 
+                 duration="{{ duration }}" 
+                 separator="{{ separator }}" 
+                 prefix="{{ prefix }}" 
+                 suffix="{{ suffix }}" 
+                 decimal-len = "{{ decimalLen }}"
+                 decimal="{{ decimal }}"
+                 start-value="startValue"
+                 instance="instance"></h1>            
+        </div>
+        <div class="col-xs-12">
+            <pre>
+                     &lt;h1 f-count-up="countData" useEasing="true" duration="{{ duration }}" separator="{{ separator }}" prefix="{{ prefix }}" suffix="{{ suffix }}" decimal-len = "{{ decimalLen }}"
+                         decimal="{{ decimal }}" start-value="{{ startValue }}" instance="instance">&lt;/h1>            
+            </pre>           
+        </div>
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">start value: </label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" ng-model="startValue">
+                </div>
+            </div>            
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">count to: </label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" ng-model="countData">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">prefix:</label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" ng-model="prefix">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">suffix:</label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" ng-model="suffix">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">duration:</label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" ng-model="duration">
+                </div>                
+            </div>  
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">decimal length:</label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" ng-model="decimalLen">
+                </div>                
+            </div>  
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">decimal mark:</label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" ng-model="decimal">
+                </div>                
+            </div>                                                      
+            <div class="form-group">
+                <button class="btn btn-success" ng-click="recount()">Recount!</button>
+            </div>            
+        </div>      
+    </div>
+    <script src="//cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+    <script src="//cdn.bootcss.com/countup.js/1.8.1/countUp.min.js"></script>
+    <script src="./directive.countUp.js"></script> 
+    <script>
+          angular.module('app', ['fCountUpModule'])
+                 .controller('mainController', function($scope) {
+                    $scope.countData = 1000;
+                    $scope.recount = function() {
+                        var instance = ($scope.instance || angular.noop)();
+                        instance.reset();
+                        instance.start();
+                    }
+                 });   
+    </script>
+</body>
+</html>
